@@ -3,7 +3,6 @@ using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
-using System.Runtime.CompilerServices;
 
 
 namespace ShopTARgv23.ApplicationServices.Services
@@ -46,11 +45,13 @@ namespace ShopTARgv23.ApplicationServices.Services
             spaceship.ModifiedAt = DateTime.Now;
             _fileServices.FilesToApi(dto, spaceship);
 
-            await _context.Spaceships.AddAsync(spaceship);
+            await _context.Spaceships.AddAsync( spaceship );
             await _context.SaveChangesAsync();
 
             return spaceship;
+
         }
+
 
         public async Task<Spaceship> Update(SpaceshipDto dto)
         {
@@ -65,7 +66,6 @@ namespace ShopTARgv23.ApplicationServices.Services
             domain.EnginePower = dto.EnginePower;
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = DateTime.Now;
-            _fileServices.FilesToApi(dto, domain);
 
             _context.Spaceships.Update(domain);
             await _context.SaveChangesAsync();
@@ -78,16 +78,6 @@ namespace ShopTARgv23.ApplicationServices.Services
             var spaceship = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            var images = await _context.FileToApis
-                .Where(x => x.SpaceshipId == id)
-                .Select(y => new FileToApiDto
-                {
-                    Id = y.Id,
-                    SpaceshipId = y.SpaceshipId,
-                    ExistingFilePath = y.ExistingFilePath
-                }).ToArrayAsync();
-
-            await _fileServices.RemoveImageFromApi(images);
             _context.Spaceships.Remove(spaceship);
             await _context.SaveChangesAsync();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 
 namespace ShopTARgv23.Core.Dto
 {
@@ -13,8 +14,9 @@ namespace ShopTARgv23.Core.Dto
         public int EnginePower { get; set; }
 
         public List<IFormFile> Files { get; set; }
+
         public IEnumerable<FileToApiDto> Image { get; set; }
-            = new List<FileToApiDto>();
+        = new List<FileToApiDto>();
 
         //only in db
         public DateTime CreatedAt { get; set; }

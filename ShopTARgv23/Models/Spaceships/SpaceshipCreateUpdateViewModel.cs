@@ -11,8 +11,9 @@
         public int EnginePower { get; set; }
 
         public List<IFormFile> Files { get; set; }
-        public List<FileToApiViewModel> FileToApiViewModels { get; set; }
-            =  new List<FileToApiViewModel>();
+
+        public List <FileToApiViewModels> FileToApiViewModels { get; set; }
+            = new List<FileToApiViewModels>();
 
         //only in db
         public DateTime CreatedAt { get; set; }
